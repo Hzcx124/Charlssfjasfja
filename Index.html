@@ -26,7 +26,7 @@
 
         // Cargar el modelo VRM
         const loader = new VRMLoader();
-        loader.load('modelo.vrm', (vrm) => {  // Cambia 'modelo.vrm' al nombre de tu archivo
+        loader.load('modelo.vrm', (vrm) => {  
             scene.add(vrm.scene);
             animate();
         }, undefined, (error) => {
