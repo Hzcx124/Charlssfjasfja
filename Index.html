@@ -1,48 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VRM Model Viewer</title>
-    <style>
-        body { margin: 0; overflow: hidden; }
-        canvas { display: block; }
-    </style>
+    <title>Sistema de Gestión de Refugio de Animales</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script type="module">
-        import { VRMLoader } from 'https://cdn.jsdelivr.net/npm/three-vrm@0.6.4';
+    <h1>Sistema de Gestión de Refugio de Animales</h1>
+    
+    <div class="section">
+        <h2>Registro de Animales</h2>
+        <form id="animalForm">
+            <input type="text" id="animalName" placeholder="Nombre" required>
+            <input type="text" id="animalBreed" placeholder="Raza" required>
+            <input type="number" id="animalAge" placeholder="Edad" required>
+            <input type="text" id="animalHealth" placeholder="Estado de Salud" required>
+            <button type="submit">Registrar Animal</button>
+        </form>
+        <table id="animalTable">
+            <tr>
+                <th>Nombre</th>
+                <th>Raza</th>
+                <th>Edad</th>
+                <th>Salud</th>
+            </tr>
+        </table>
+    </div>
 
-        // Crear la escena y la cámara
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.set(0, 1.5, 3);
+    <div class="section">
+        <h2>Control de Inventario</h2>
+        <form id="inventoryForm">
+            <input type="text" id="itemName" placeholder="Nombre del artículo" required>
+            <input type="number" id="itemQuantity" placeholder="Cantidad" required>
+            <select id="itemType">
+                <option value="Alimento">Alimento</option>
+                <option value="Medicamento">Medicamento</option>
+                <option value="Suministro">Suministro</option>
+            </select>
+            <button type="submit">Agregar al Inventario</button>
+        </form>
+        <table id="inventoryTable">
+            <tr>
+                <th>Artículo</th>
+                <th>Cantidad</th>
+                <th>Tipo</th>
+            </tr>
+        </table>
+    </div>
 
-        // Crear el renderizador
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
+    <div class="section">
+        <h2>Gestión de Adopciones</h2>
+        <form id="adoptionForm">
+            <input type="text" id="adopterName" placeholder="Nombre del adoptante" required>
+            <input type="text" id="adoptedAnimal" placeholder="Animal adoptado" required>
+            <input type="date" id="adoptionDate" required>
+            <button type="submit">Registrar Adopción</button>
+        </form>
+        <table id="adoptionTable">
+            <tr>
+                <th>Adoptante</th>
+                <th>Animal</th>
+                <th>Fecha</th>
+            </tr>
+        </table>
+    </div>
 
-        // Cargar el modelo VRM
-        const loader = new VRMLoader();
-        loader.load('modelo.vrm', (vrm) => {  
-            scene.add(vrm.scene);
-            animate();
-        }, undefined, (error) => {
-            console.error('Error al cargar el modelo VRM:', error);
-        });
+    <div class="section">
+        <h2>Administración de Donaciones</h2>
+        <form id="donationForm">
+            <input type="text" id="donorName" placeholder="Nombre del donante" required>
+            <input type="number" id="donationAmount" placeholder="Monto" required>
+            <input type="date" id="donationDate" required>
+            <button type="submit">Registrar Donación</button>
+        </form>
+        <table id="donationTable">
+            <tr>
+                <th>Donante</th>
+                <th>Monto</th>
+                <th>Fecha</th>
+            </tr>
+        </table>
+    </div>
 
-        // Crear la luz
-        const light = new THREE.DirectionalLight(0xffffff, 1);
-        light.position.set(0, 1, 1).normalize();
-        scene.add(light);
-
-        // Función de animación
-        function animate() {
-            requestAnimationFrame(animate);
-            renderer.render(scene, camera);
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
